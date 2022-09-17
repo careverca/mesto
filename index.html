@@ -9,11 +9,31 @@
 
 <body class="body">
 
-   <header class="header">
-    <img src="images/logo-white.svg" alt="Место" class="header__logo">
-   </header>
+    <section class="popup">
+        <div class="popup__container">
+            <img src="images/close-icon.svg" alt="Закрыть" class="popup__close">
+            <div class="popup__card">
+                <p class="popup__title">Редактировать профиль</p>
+                <form>
+                    <label>
+                      <input class="popup__input popup__input_name" type="text" name="name" placeholder="Имя">
+                    </label>
+                </form>
+                <form>
+                    <label>
+                      <input class="popup__input popup__input_job" type="text" name="job" placeholder="Специальность">
+                    </label>
+                </form>
+                <button class="popup__submit" type="submit">Сохранить</button>
+            </div>
+        </div>
+    </section>
+
+    <header class="header">
+        <img src="images/logo-white.svg" alt="Место" class="header__logo">
+    </header>
    
-   <main class="content">
+    <main class="content">
    
     <section class="profile">
         <img src="images/prof-pic.jpg" alt="Аватар" class="profile__avatar">
@@ -70,12 +90,13 @@
         </article>
     </section>
    
-</main> 
+    </main>
 
     <footer class="footer">
         <a href="#" class="footer__link">© 2020 Mesto Russia</a>
     </footer>
 
+    <script src="script.js"></script>
 </body>
 
 </html>

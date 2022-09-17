@@ -19,3 +19,7 @@
     background-size: 16px 16px;
 }
 }
+
+.profile__add:hover {
+    opacity: 0.6;
+}
