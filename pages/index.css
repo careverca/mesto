@@ -1,6 +1,6 @@
 @import url(../vendor/normalize.css);
 
-@import url(../styles/fonts.css);
+@import url(../vendor/fonts.css);
 
 @import url(../blocks/body/body.css);
 
@@ -11,10 +11,9 @@
 @import url(../blocks/popup/__title/popup__title.css);
 @import url(../blocks/popup/__submit/popup__submit.css);
 @import url(../blocks/popup/__close/popup__close.css);
-@import url(../blocks/popup/__card/popup__card.css);
 @import url(../blocks/popup/__input/popup__input.css);
-@import url(../blocks/popup/__input/_name/popup__input_name.css);
-@import url(../blocks/popup/__input/_job/popup__input_job.css);
+@import url(../blocks/popup/__input/_type_name/popup__input_type_name.css);
+@import url(../blocks/popup/__input/_type_job/popup__input_type_job.css);
 @import url(../blocks/popup/__container/popup__container.css);
 
 @import url(../blocks/element/element.css);
@@ -39,8 +38,3 @@
 @import url(../blocks/profile/__info/profile__info.css);
 @import url(../blocks/profile/__name/profile__name.css);
 @import url(../blocks/profile/__job/profile__job.css);
-
-
-body::-webkit-scrollbar {
-    display: none;
-}

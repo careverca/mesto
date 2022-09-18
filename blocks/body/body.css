@@ -4,3 +4,6 @@
     background-color: black;
     font-family: "Inter", Arial, Helvetica, sans-serif;
 }
+body::-webkit-scrollbar {
+    display: none;
+}

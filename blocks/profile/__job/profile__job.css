@@ -14,6 +14,7 @@
 
 @media screen and (max-width: 720px) {
 .profile__job {
+    width: 100%;
     font-size: 14px;
     line-height: 17px;
 }
