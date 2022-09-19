@@ -33,7 +33,7 @@ editBtn.addEventListener("click", openPopup);
 closeBtn.addEventListener("click", togglePopup);
 
 // Handling "submit button"
-submitBtn.addEventListener("click", function submit(evt){
+submitBtn.addEventListener("click", function submit(evt) {
     evt.preventDefault();
     profileName.textContent = inputName.value;
     profileJob.textContent = inputJob.value;

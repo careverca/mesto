@@ -3,6 +3,10 @@
     padding: 0;
     background-color: black;
     font-family: "Inter", Arial, Helvetica, sans-serif;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;  
 }
 body::-webkit-scrollbar {
     display: none;
