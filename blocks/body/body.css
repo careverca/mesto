@@ -8,6 +8,8 @@
     -moz-text-size-adjust: 100%;
     text-rendering: optimizeLegibility;  
 }
-body::-webkit-scrollbar {
+
+/* Needed for testing markup with Pixelperfect */
+/* body::-webkit-scrollbar {
     display: none;
-}
+} */

@@ -5,11 +5,13 @@
     padding: 0;
     display: grid;
     grid-template-columns: 1fr min-content;
+    grid-template-rows: 58px;
 }
 
 @media screen and (max-width: 860px) {
     .profile__info {
         max-width: none;
+        grid-template-rows: auto;
         width: auto;
         justify-content: center;
         height: auto;

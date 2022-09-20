@@ -3,19 +3,17 @@
 let editForm = document.querySelector(".popup");
 let editBtn = document.querySelector(".profile__edit");
 let closeBtn = editForm.querySelector(".popup__close");
-let submitBtn = editForm.querySelector(".popup__submit");
+let popupForm = editForm.querySelector(".popup__form");
 let profileName = document.querySelector(".profile__name");
 let profileJob = document.querySelector(".profile__job");
 let inputName = editForm.querySelector(".popup__input_type_name");
 let inputJob = editForm.querySelector(".popup__input_type_job");
 
-function openPopup() {
-    togglePopup()
-    inputName.value = profileName.textContent;
-    inputJob.value = profileJob.textContent;
-}
-
 function togglePopup() {
+    if (!editForm.classList.contains('popup_opened')) {
+        inputName.value = profileName.textContent;
+        inputJob.value = profileJob.textContent;
+    }
     editForm.classList.toggle('popup_opened');
 }
 
@@ -27,13 +25,13 @@ function togglePopup() {
 } )*/
 
 // Handling "edit button"
-editBtn.addEventListener("click", openPopup);
+editBtn.addEventListener("click", togglePopup);
 
 // Handling "close button"
 closeBtn.addEventListener("click", togglePopup);
 
 // Handling "submit button"
-submitBtn.addEventListener("click", function submit(evt) {
+popupForm.addEventListener("submit", function submit(evt){
     evt.preventDefault();
     profileName.textContent = inputName.value;
     profileJob.textContent = inputJob.value;
