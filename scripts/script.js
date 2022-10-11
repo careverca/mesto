@@ -1,14 +1,6 @@
 // Default data
 const initialCards = [
   {
-    name: 'Карачаево-Черкессия',
-    link: '/images/kch.jpg'
-  },
-  {
-    name: 'Горный Алтай',
-    link: '/images/altay.jpg'
-  },
-  {
     name: 'Архыз',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
   },
