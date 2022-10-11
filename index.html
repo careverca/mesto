@@ -12,14 +12,22 @@
 
     <section class="popup">
         <div class="popup__container">
-            <button class="popup__close" type="button"></button>
-            <h2 class="popup__title">Редактировать профиль</h2>
+            <button class="close-btn" type="button"></button>
+            <h2 class="popup__title"></h2>
             <form class="popup__form" name="user-data">
-                <input class="popup__input popup__input_type_name" type="text" name="name" placeholder="Имя">
-                <input class="popup__input popup__input_type_job" type="text" name="job" placeholder="Специальность">
-                <button class="popup__submit" type="submit">Сохранить</button>
+                <input class="popup__input popup__input_field-1" type="text" name="field1">
+                <input class="popup__input popup__input_field-2" type="text" name="field2">
+                <button class="popup__submit" type="submit"></button>
             </form>
         </div>
+    </section>
+
+    <section class="img-popup img-popup_opened">
+        <div class="img-popup__container">
+            <button class="close-btn" type="button"></button>
+            <img class="img-popup__pic" src="images/hills.jpg" alt="Картинка, на которую нажали">
+            <p class="img-popup__text">Карачаево-Черкессия</p>
+        </div> 
     </section>
 
     <header class="header">
@@ -39,48 +47,16 @@
         </section>
 
         <section class="elements">
-            <article class="element">
-                <img src="images/castle.jpg" alt="Замок" class="element__image">
-                <div class="element__description">
-                    <h2 class="element__title">Карачаевск</h2>
-                    <button class="element__like" type="button"></button>
-                </div>
-            </article>
-            <article class="element">
-                <img src="images/hills.jpg" alt="Холмы" class="element__image">
-                <div class="element__description">
-                    <h2 class="element__title">Гора Эльбрус</h2>
-                    <button class="element__like" type="button"></button>
-                </div>
-            </article>
-            <article class="element">
-                <img src="images/mountains.jpg" alt="Горы" class="element__image">
-                <div class="element__description">
-                    <h2 class="element__title">Домбай</h2>
-                    <button class="element__like" type="button"></button>
-                </div>
-            </article>
-            <article class="element">
-                <img src="images/hills.jpg" alt="Холмы" class="element__image">
-                <div class="element__description">
-                    <h2 class="element__title">Гора Эльбрус</h2>
-                    <button class="element__like" type="button"></button>
-                </div>
-            </article>
-            <article class="element">
-                <img src="images/mountains.jpg" alt="Горы" class="element__image">
-                <div class="element__description">
-                    <h2 class="element__title">Домбай</h2>
-                    <button class="element__like" type="button"></button>
-                </div>
-            </article>
-            <article class="element">
-                <img src="images/castle.jpg" alt="Замок" class="element__image">
-                <div class="element__description">
-                    <h2 class="element__title">Карачаево-Черкесия</h2>
-                    <button class="element__like" type="button"></button>
-                </div>
-            </article>
+            <template class="template">
+                <article class="element">
+                    <img src="" alt="" class="element__image">
+                    <div class="element__description">
+                        <h2 class="element__title"></h2>
+                        <button class="element__like" type="button"></button>
+                    </div>
+                    <button class="element__remove" type="button"></button>
+                </article>
+            </template>
         </section>
 
     </main>

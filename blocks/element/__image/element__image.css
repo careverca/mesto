@@ -4,6 +4,7 @@
     height: 282px;
     object-fit: cover;
     object-position: top left;
+    cursor: pointer;
     margin: 0;
     padding: 0;
 }

@@ -1,39 +1,174 @@
+// Default data
+const initialCards = [
+  {
+    name: 'Карачаево-Черкессия',
+    link: '/images/kch.jpg'
+  },
+  {
+    name: 'Горный Алтай',
+    link: '/images/altay.jpg'
+  },
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
+
 // Querying elements
-//let likes = document.querySelectorAll(".element__like");
-let editForm = document.querySelector(".popup");
-let editBtn = document.querySelector(".profile__edit");
-let closeBtn = editForm.querySelector(".popup__close");
-let popupForm = editForm.querySelector(".popup__form");
-let profileName = document.querySelector(".profile__name");
-let profileJob = document.querySelector(".profile__job");
-let inputName = editForm.querySelector(".popup__input_type_name");
-let inputJob = editForm.querySelector(".popup__input_type_job");
+const editForm = document.querySelector('.popup');
+const editBtn = document.querySelector('.profile__edit');
+const profileName = document.querySelector('.profile__name');
+const profileJob = document.querySelector('.profile__job');
+const addBtn = document.querySelector('.profile__add');
+const submitBtn = editForm.querySelector('.popup__submit');
+const popupForm = editForm.querySelector('.popup__form');
+const popupTitle = editForm.querySelector('.popup__title');
+const inputField1 = editForm.querySelector('.popup__input_field-1');
+const inputField2 = editForm.querySelector('.popup__input_field-2');
+const popupImg = document.querySelector('.img-popup');
+const popupImgPic = document.querySelector('.img-popup__pic');
+const popupImgText = document.querySelector('.img-popup__text');
+
+// Filling elements
+const elements = document.querySelector('.elements');
+const template = elements.querySelector('.template').content;
+initialCards.forEach((el) => {
+    const element = template.querySelector('.element').cloneNode(true);
+    element.querySelector('.element__title').textContent = el.name;
+    element.querySelector('.element__image').src = el.link;
+    elements.append(element);
+})
+
+// Handling 'edit button'
+editBtn.addEventListener('click', toggleEditPopup);
+
+// Handling 'close button'
+const closeBtn = document.querySelectorAll('.close-btn');
+closeBtn.forEach(el => {
+    el.addEventListener('click', evt => {
+        console.log(evt.target.className);
+        closePopup(evt);
+    })
+});
+
+// Handling 'submit button'
+popupForm.addEventListener('submit', function submit(evt){
+    evt.preventDefault();
+    if (popupTitle.textContent === 'Редактировать профиль') {
+        profileName.textContent = inputField1.value;
+        profileJob.textContent = inputField2.value;
+        togglePopup();
+    } else if (popupTitle.textContent === 'Новое место') {
+        createCard();
+    }
+})
+
+// Handling 'add button'
+addBtn.addEventListener('click', toggleAddPopup);
+
+// Handling likes
+function queryLikes() {
+    let likeBtn = document.querySelectorAll('.element__like');
+    likeBtn.forEach(el => {
+        el.addEventListener('click', evt => {
+            const evtTarget = evt.target;
+            evtTarget.classList.toggle('element__like_active');
+        })
+    })
+}
+queryLikes();
+
+// Handling remove buttons
+function queryRm() {
+    let rmBtn = document.querySelectorAll('.element__remove');
+    rmBtn.forEach(el => {
+        el.addEventListener('click', evt => {
+            const evtTarget = evt.target;
+            evtTarget.parentNode.remove();
+        })
+    })
+}
+queryRm();
+
+// Handling img-popup
+function queryImg() {
+    let imgBtn = document.querySelectorAll('.element__image');
+    imgBtn.forEach(el => {
+        el.addEventListener('click', evt => {
+            const evtTarget = evt.target;
+            popupImg.classList.add('img-popup_opened');
+            popupImgPic.src = evtTarget.src;
+            popupImgText.textContent = evtTarget.nextElementSibling.firstElementChild.textContent;
+        })
+    })
+}
+queryImg();
 
 function togglePopup() {
-    if (!editForm.classList.contains('popup_opened')) {
-        inputName.value = profileName.textContent;
-        inputJob.value = profileJob.textContent;
-    }
     editForm.classList.toggle('popup_opened');
 }
 
-// Handling "like buttons"
-/*likes.forEach(like => {
-    like.addEventListener("click", function likeToggle() {
-        like.classList.toggle('element__like_active');
-    })
-} )*/
-
-// Handling "edit button"
-editBtn.addEventListener("click", togglePopup);
-
-// Handling "close button"
-closeBtn.addEventListener("click", togglePopup);
-
-// Handling "submit button"
-popupForm.addEventListener("submit", function submit(evt){
-    evt.preventDefault();
-    profileName.textContent = inputName.value;
-    profileJob.textContent = inputJob.value;
+function toggleEditPopup() {
+    if (!editForm.classList.contains('popup_opened')) {
+        popupTitle.textContent = 'Редактировать профиль';
+        submitBtn.textContent = 'Сохранить';
+        inputField1.setAttribute('placeholder', 'Имя');
+        inputField2.setAttribute('placeholder', 'Специальность');
+        inputField1.value = profileName.textContent;
+        inputField2.value = profileJob.textContent;
+    }
     togglePopup();
-})
+}
+
+function closePopup(evt) {
+    const evtTarget = evt.target;
+    console.log(evtTarget.parentElement.className);
+    if (evtTarget.parentElement.className === 'popup__container') {
+        editForm.classList.remove('popup_opened');
+    } else if (evtTarget.parentElement.className === 'img-popup__container') {
+        popupImg.classList.toggle('img-popup_opened');
+    }
+}
+
+function toggleAddPopup() {
+    if (!editForm.classList.contains('popup_opened')) {
+        popupTitle.textContent = 'Новое место';
+        submitBtn.textContent = 'Создать';
+        inputField1.setAttribute('placeholder', 'Название');
+        inputField2.setAttribute('placeholder', 'Ссылка на картинку');
+        inputField1.value = '';
+        inputField2.value = '';
+    }
+    togglePopup();
+}
+
+function createCard() {
+    const element = template.querySelector('.element').cloneNode(true);
+    element.querySelector('.element__title').textContent = inputField1.value;
+    element.querySelector('.element__image').src = inputField2.value;
+    elements.prepend(element);
+    queryLikes();
+    queryRm();
+    queryImg();
+    togglePopup();
+}
