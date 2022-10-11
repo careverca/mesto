@@ -88,10 +88,11 @@ addBtn.addEventListener('click', showAddPopup);
 
 // Handling 'like buttons'
 function queryLikes() {
-    const likeBtn = document.querySelectorAll('.element__like');
-    likeBtn.forEach(el => {
+    const likeBtns = document.querySelectorAll('.element__like');
+    likeBtns.forEach(el => {
         el.addEventListener('click', evt => {
             const evtTarget = evt.target;
+            console.log(evtTarget);
             evtTarget.classList.toggle('element__like_active');
         })
     })
@@ -99,11 +100,14 @@ function queryLikes() {
 
 // Handling 'remove buttons'
 function queryRm() {
-    const rmBtn = document.querySelectorAll('.element__remove');
-    rmBtn.forEach(el => {
+    const rmBtns = document.querySelectorAll('.element__remove');
+    rmBtns.forEach(el => {
         el.addEventListener('click', evt => {
             const evtTarget = evt.target;
+            console.log(rmBtns);
             evtTarget.parentNode.remove();
+            queryLikes();
+            handleImgs();
         })
     })
 }
@@ -158,8 +162,8 @@ function createCard() {
     element.querySelector('.element__image').src = inputFieldUrl.value;
     elements.prepend(element);
     queryLikes();
-    queryRm();
     handleImgs();
+    queryRm();
     togglePopup();
 }
 
