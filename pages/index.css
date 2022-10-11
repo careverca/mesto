@@ -13,8 +13,10 @@
 @import url(../blocks/popup/__title/popup__title.css);
 @import url(../blocks/popup/__submit/popup__submit.css);
 @import url(../blocks/popup/__input/popup__input.css);
-@import url(../blocks/popup/__input/_field/popup__input_field-1.css);
-@import url(../blocks/popup/__input/_field/popup__input_field-2.css);
+@import url(../blocks/popup/__input/_field/popup__input_field-name.css);
+@import url(../blocks/popup/__input/_field/popup__input_field-job.css);
+@import url(../blocks/popup/__input/_field/popup__input_field-place.css);
+@import url(../blocks/popup/__input/_field/popup__input_field-url.css);
 @import url(../blocks/popup/__container/popup__container.css);
 
 @import url(../blocks/img-popup/img-popup.css);

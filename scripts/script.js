@@ -35,16 +35,18 @@ const initialCards = [
 ];
 
 // Querying elements
-const editForm = document.querySelector('.popup');
+const popupEditForm = document.querySelector('.popup');
 const editBtn = document.querySelector('.profile__edit');
 const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job');
 const addBtn = document.querySelector('.profile__add');
-const submitBtn = editForm.querySelector('.popup__submit');
-const popupForm = editForm.querySelector('.popup__form');
-const popupTitle = editForm.querySelector('.popup__title');
-const inputField1 = editForm.querySelector('.popup__input_field-1');
-const inputField2 = editForm.querySelector('.popup__input_field-2');
+const submitBtn = popupEditForm.querySelector('.popup__submit');
+const popupForm = popupEditForm.querySelector('.popup__form');
+const popupTitle = popupEditForm.querySelector('.popup__title');
+const inputFieldName = popupEditForm.querySelector('.popup__input_field-name');
+const inputFieldJob = popupEditForm.querySelector('.popup__input_field-job');
+const inputFieldPlace = popupEditForm.querySelector('.popup__input_field-place');
+const inputFieldUrl = popupEditForm.querySelector('.popup__input_field-url');
 const popupImg = document.querySelector('.img-popup');
 const popupImgPic = document.querySelector('.img-popup__pic');
 const popupImgText = document.querySelector('.img-popup__text');
@@ -70,7 +72,7 @@ closeBtn.forEach(el => {
         const evtTarget = evt.target;
         console.log(evtTarget.parentElement.className);
         if (evtTarget.parentElement.className === 'popup__container') {
-            editForm.classList.remove('popup_opened');
+            popupEditForm.classList.remove('popup_opened');
         } else if (evtTarget.parentElement.className === 'img-popup__container') {
             popupImg.classList.toggle('img-popup_opened');
         }
@@ -81,8 +83,8 @@ closeBtn.forEach(el => {
 popupForm.addEventListener('submit', function submit(evt){
     evt.preventDefault();
     if (popupTitle.textContent === 'Редактировать профиль') {
-        profileName.textContent = inputField1.value;
-        profileJob.textContent = inputField2.value;
+        profileName.textContent = inputFieldName.value;
+        profileJob.textContent = inputFieldJob.value;
         togglePopup();
     } else if (popupTitle.textContent === 'Новое место') {
         createCard();
@@ -94,7 +96,7 @@ addBtn.addEventListener('click', showAddPopup);
 
 // Handling 'like buttons'
 function queryLikes() {
-    let likeBtn = document.querySelectorAll('.element__like');
+    const likeBtn = document.querySelectorAll('.element__like');
     likeBtn.forEach(el => {
         el.addEventListener('click', evt => {
             const evtTarget = evt.target;
@@ -105,7 +107,7 @@ function queryLikes() {
 
 // Handling 'remove buttons'
 function queryRm() {
-    let rmBtn = document.querySelectorAll('.element__remove');
+    const rmBtn = document.querySelectorAll('.element__remove');
     rmBtn.forEach(el => {
         el.addEventListener('click', evt => {
             const evtTarget = evt.target;
@@ -115,8 +117,8 @@ function queryRm() {
 }
 
 // Handling 'img buttons' & showing 'img-popup'
-function imgPopup() {
-    let imgBtn = document.querySelectorAll('.element__image');
+function handleImgs() {
+    const imgBtn = document.querySelectorAll('.element__image');
     imgBtn.forEach(el => {
         el.addEventListener('click', evt => {
             const evtTarget = evt.target;
@@ -129,26 +131,30 @@ function imgPopup() {
 
 // Showing 'edit popup'
 function showEditPopup() {
-    if (!editForm.classList.contains('popup_opened')) {
+    if (!popupEditForm.classList.contains('popup_opened')) {
         popupTitle.textContent = 'Редактировать профиль';
         submitBtn.textContent = 'Сохранить';
-        inputField1.setAttribute('placeholder', 'Имя');
-        inputField2.setAttribute('placeholder', 'Специальность');
-        inputField1.value = profileName.textContent;
-        inputField2.value = profileJob.textContent;
+        inputFieldName.style.display = "block";
+        inputFieldJob.style.display = "block";
+        inputFieldPlace.style.display = "none";
+        inputFieldUrl.style.display = "none";
+        inputFieldName.value = profileName.textContent;
+        inputFieldJob.value = profileJob.textContent;
     }
     togglePopup();
 }
 
 // Showing 'add popup'
 function showAddPopup() {
-    if (!editForm.classList.contains('popup_opened')) {
+    if (!popupEditForm.classList.contains('popup_opened')) {
         popupTitle.textContent = 'Новое место';
         submitBtn.textContent = 'Создать';
-        inputField1.setAttribute('placeholder', 'Название');
-        inputField2.setAttribute('placeholder', 'Ссылка на картинку');
-        inputField1.value = '';
-        inputField2.value = '';
+        inputFieldPlace.style.display = "block";
+        inputFieldUrl.style.display = "block";
+        inputFieldName.style.display = "none";
+        inputFieldJob.style.display = "none";
+        inputFieldPlace.value = '';
+        inputFieldUrl.value = '';
     }
     togglePopup();
 }
@@ -156,19 +162,19 @@ function showAddPopup() {
 // Creating a new card
 function createCard() {
     const element = template.querySelector('.element').cloneNode(true);
-    element.querySelector('.element__title').textContent = inputField1.value;
-    element.querySelector('.element__image').src = inputField2.value;
+    element.querySelector('.element__title').textContent = inputFieldPlace.value;
+    element.querySelector('.element__image').src = inputFieldUrl.value;
     elements.prepend(element);
     queryLikes();
     queryRm();
-    queryImg();
+    handleImgs();
     togglePopup();
 }
 
 function togglePopup() {
-    editForm.classList.toggle('popup_opened');
+    popupEditForm.classList.toggle('popup_opened');
 }
 
 queryLikes();
 queryRm();
-imgPopup();
+handleImgs();
