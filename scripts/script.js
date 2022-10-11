@@ -60,18 +60,24 @@ initialCards.forEach((el) => {
 })
 
 // Handling 'edit button'
-editBtn.addEventListener('click', toggleEditPopup);
+editBtn.addEventListener('click', showEditPopup);
 
-// Handling 'close button'
+// Handling 'close buttons'
 const closeBtn = document.querySelectorAll('.close-btn');
 closeBtn.forEach(el => {
     el.addEventListener('click', evt => {
         console.log(evt.target.className);
-        closePopup(evt);
+        const evtTarget = evt.target;
+        console.log(evtTarget.parentElement.className);
+        if (evtTarget.parentElement.className === 'popup__container') {
+            editForm.classList.remove('popup_opened');
+        } else if (evtTarget.parentElement.className === 'img-popup__container') {
+            popupImg.classList.toggle('img-popup_opened');
+        }
     })
 });
 
-// Handling 'submit button'
+// Handling 'submit buttons'
 popupForm.addEventListener('submit', function submit(evt){
     evt.preventDefault();
     if (popupTitle.textContent === 'Редактировать профиль') {
@@ -84,9 +90,9 @@ popupForm.addEventListener('submit', function submit(evt){
 })
 
 // Handling 'add button'
-addBtn.addEventListener('click', toggleAddPopup);
+addBtn.addEventListener('click', showAddPopup);
 
-// Handling likes
+// Handling 'like buttons'
 function queryLikes() {
     let likeBtn = document.querySelectorAll('.element__like');
     likeBtn.forEach(el => {
@@ -96,9 +102,8 @@ function queryLikes() {
         })
     })
 }
-queryLikes();
 
-// Handling remove buttons
+// Handling 'remove buttons'
 function queryRm() {
     let rmBtn = document.querySelectorAll('.element__remove');
     rmBtn.forEach(el => {
@@ -108,10 +113,9 @@ function queryRm() {
         })
     })
 }
-queryRm();
 
-// Handling img-popup
-function queryImg() {
+// Handling 'img buttons' & showing 'img-popup'
+function imgPopup() {
     let imgBtn = document.querySelectorAll('.element__image');
     imgBtn.forEach(el => {
         el.addEventListener('click', evt => {
@@ -122,13 +126,9 @@ function queryImg() {
         })
     })
 }
-queryImg();
 
-function togglePopup() {
-    editForm.classList.toggle('popup_opened');
-}
-
-function toggleEditPopup() {
+// Showing 'edit popup'
+function showEditPopup() {
     if (!editForm.classList.contains('popup_opened')) {
         popupTitle.textContent = 'Редактировать профиль';
         submitBtn.textContent = 'Сохранить';
@@ -140,17 +140,8 @@ function toggleEditPopup() {
     togglePopup();
 }
 
-function closePopup(evt) {
-    const evtTarget = evt.target;
-    console.log(evtTarget.parentElement.className);
-    if (evtTarget.parentElement.className === 'popup__container') {
-        editForm.classList.remove('popup_opened');
-    } else if (evtTarget.parentElement.className === 'img-popup__container') {
-        popupImg.classList.toggle('img-popup_opened');
-    }
-}
-
-function toggleAddPopup() {
+// Showing 'add popup'
+function showAddPopup() {
     if (!editForm.classList.contains('popup_opened')) {
         popupTitle.textContent = 'Новое место';
         submitBtn.textContent = 'Создать';
@@ -162,6 +153,7 @@ function toggleAddPopup() {
     togglePopup();
 }
 
+// Creating a new card
 function createCard() {
     const element = template.querySelector('.element').cloneNode(true);
     element.querySelector('.element__title').textContent = inputField1.value;
@@ -172,3 +164,11 @@ function createCard() {
     queryImg();
     togglePopup();
 }
+
+function togglePopup() {
+    editForm.classList.toggle('popup_opened');
+}
+
+queryLikes();
+queryRm();
+imgPopup();
