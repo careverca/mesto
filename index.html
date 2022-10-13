@@ -10,27 +10,38 @@
 
 <body class="body">
 
-    <section class="popup">
-        <div class="popup__container">
-            <button class="close-btn" type="button"></button>
-            <h2 class="popup__title"></h2>
+    <div class="popup popup_type_edit-form">
+        <div class="popup__container popup__container_type_form">
+            <button class="popup__close-btn" type="button"></button>
+            <h2 class="popup__title">Редактировать профиль</h2>
             <form class="popup__form" name="user-data">
                 <input class="popup__input popup__input_field-name" placeholder="Имя" type="text" name="name">
                 <input class="popup__input popup__input_field-job" placeholder="Специальность" type="text" name="job">
-                <input class="popup__input popup__input_field-place" placeholder="Название" type="text" name="place">
-                <input class="popup__input popup__input_field-url" placeholder="Ссылка на картинку" type="url" name="url">
-                <button class="popup__submit" type="submit"></button>
+                <button class="popup__submit" type="submit">Сохранить</button>
             </form>
         </div>
-    </section>
+    </div>
+    
+    <div class="popup popup_type_add-card">
+        <div class="popup__container popup__container_type_form">
+            <button class="popup__close-btn" type="button"></button>
+            <h2 class="popup__title">Новое место</h2>
+            <form class="popup__form" name="user-data">
+                <input class="popup__input popup__input_field-place" placeholder="Название" type="text" name="place">
+                <input class="popup__input popup__input_field-url" placeholder="Ссылка на картинку" type="url" name="url">
+                <button class="popup__submit" type="submit">Создать</button>
+            </form>
+        </div>
+    </div>
 
-    <section class="img-popup">
-        <div class="img-popup__container">
-            <button class="close-btn" type="button"></button>
-            <img class="img-popup__pic" src="images/hills.jpg" alt="Картинка, на которую нажали">
-            <p class="img-popup__text">Карачаево-Черкессия</p>
+
+    <div class="popup popup_type_pic">
+        <div class="popup__container popup__container_type_pic">
+            <button class="popup__close-btn" type="button"></button>
+            <img class="popup__image" src="images/hills.jpg" alt="Картинка, на которую нажали">
+            <p class="popup__text">Карачаево-Черкессия</p>
         </div> 
-    </section>
+    </div>
 
     <header class="header">
         <img src="images/logo-white.svg" alt="Место" class="header__logo">
@@ -42,10 +53,10 @@
             <img src="images/prof-pic.jpg" alt="Аватар" class="profile__avatar">
             <div class="profile__info">
                 <h1 class="profile__name">Жак-Ив Кусто</h1>
-                <button class="profile__edit" type="button"></button>
+                <button class="profile__edit-btn" type="button"></button>
                 <p class="profile__job">Исследователь океана</p>
             </div>
-            <button class="profile__add" type="button"></button>
+            <button class="profile__add-btn" type="button"></button>
         </section>
 
         <section class="elements">
