@@ -8,6 +8,8 @@
     background: url("../../../images/edit.svg") no-repeat;
     background-position: center;
     background-size: 10px 10px;
+    opacity: 1;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 860px) {
@@ -21,5 +23,4 @@
 
 .profile__edit-btn:hover {
     opacity: 0.6;
-    cursor: pointer;
 }
