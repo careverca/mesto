@@ -1,10 +1,10 @@
 const enableValidation = {
   formSelector: '.form',
   inputSelector: '.form__input',
-  submitButtonSelector: '.form__submit',
+  submittingButtonSelector: '.form__submit',
   inputErrorSelector: '.error',
   inputErrorVisible: 'error_visible',
-  submitButtonInvalid: 'form__submit_invalid',
+  submittingButtonInvalid: 'form__submit_invalid',
   inputInvalid: 'form__input_invalid',
   errorVisible: 'error__visible'
 };
@@ -12,8 +12,8 @@ const enableValidation = {
 function validateOnOpen(card) {
   const formElement = card.querySelector(enableValidation.formSelector);
   const inputList = Array.from(card.querySelectorAll(enableValidation.inputSelector));
-  const submitButton = card.querySelector(enableValidation.submitButtonSelector);
-  checkIfAllInputIsValid(inputList, submitButton);
+  const submittingButton = card.querySelector(enableValidation.submittingButtonSelector);
+  checkIfAllInputIsValid(inputList, submittingButton);
   inputList.forEach((inputElement) => {
     checkInputValidity(formElement, inputElement);
   })
@@ -30,13 +30,13 @@ function checkIfValid() {
 function setEventListeners(formElement) {
   // Querying every .form__input
   const inputList = Array.from(formElement.querySelectorAll(enableValidation.inputSelector));
-  const submitButton = formElement.querySelector(enableValidation.submitButtonSelector);
+  const submittingButton = formElement.querySelector(enableValidation.submittingButtonSelector);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', function () {
       // Handling Error message (span) & Red underline warning
       checkInputValidity(formElement, inputElement);
       // Handling Submit Button state:
-      checkIfAllInputIsValid(inputList, submitButton);
+      checkIfAllInputIsValid(inputList, submittingButton);
     });
   });
 }
@@ -49,15 +49,15 @@ function checkInputValidity(formElement, inputElement) {
   }
 }
 
-function checkIfAllInputIsValid(inputList, submitButton) {
+function checkIfAllInputIsValid(inputList, submittingButton) {
   // Return FALSE if at least 1 inputElement is NOT valid
   const valid = !inputList.some((inputElement) => {
     return !inputElement.validity.valid;
   });
   if (valid) {
-    toggleSubmitState(true, submitButton);
+    toggleSubmitState(true, submittingButton);
   } else {
-    toggleSubmitState(false, submitButton);
+    toggleSubmitState(false, submittingButton);
   }
 }
 
@@ -79,13 +79,13 @@ function hideInputError(formElement, inputElement) {
   errorElement.textContent = '';
 }
 
-function toggleSubmitState(state, submitButton) {
+function toggleSubmitState(state, submittingButton) {
   if (state) {
-    submitButton.classList.remove(enableValidation.submitButtonInvalid);
-    submitButton.removeAttribute('disabled');
+    submittingButton.classList.remove(enableValidation.submittingButtonInvalid);
+    submittingButton.removeAttribute('disabled');
   } else {
-    submitButton.classList.add(enableValidation.submitButtonInvalid);
-    submitButton.setAttribute('disabled', true);
+    submittingButton.classList.add(enableValidation.submittingButtonInvalid);
+    submittingButton.setAttribute('disabled', true);
   }
 }
 

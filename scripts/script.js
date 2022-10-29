@@ -68,7 +68,6 @@ popupEditCardCloseBtn.addEventListener("click", () => {
 addingCardBtn.addEventListener("click", openAddCardForm);
 
 function openAddCardForm() {
-  const submitButton = popupAddCard.querySelector(".form__submit");
   togglePopup(popupAddCard);
   inputPlace.parentElement.reset();
 }
