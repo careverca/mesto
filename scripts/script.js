@@ -4,6 +4,7 @@ const addingCardBtn = document.querySelector(".profile__add-btn");
 const profileName = document.querySelector(".profile__name");
 const profileJob = document.querySelector(".profile__job");
 
+
 // Popup edit-card elements
 const popupEditCard = document.querySelector(".popup_type_edit-card");
 const editingForm = popupEditCard.querySelector(".form-edit");
