@@ -10,14 +10,16 @@
 
 <body class="body">
 
-    <div class="popup popup_type_edit-form">
+    <div class="popup popup_type_edit-card">
         <div class="popup__container popup__container_type_form">
             <button class="popup__close-btn" type="button"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
-            <form class="popup__form" name="user-data">
-                <input class="popup__input popup__input_field-name" placeholder="Имя" type="text" name="name">
-                <input class="popup__input popup__input_field-job" placeholder="Специальность" type="text" name="job">
-                <button class="popup__submit" type="submit">Сохранить</button>
+            <form class="form form-edit" name="user-data" novalidate>
+                <input class="form__input form__input_field-name" placeholder="Имя" required type="text" name="name" minlength="2" maxlength="40">
+                <span class="error" id="name-error"></span>
+                <input class="form__input form__input_field-job" placeholder="Специальность" required type="text" name="job" minlength="2" maxlength="200">
+                <span class="error" id="job-error"></span>
+                <button class="form__submit" type="submit">Сохранить</button>
             </form>
         </div>
     </div>
@@ -26,10 +28,12 @@
         <div class="popup__container popup__container_type_form">
             <button class="popup__close-btn" type="button"></button>
             <h2 class="popup__title">Новое место</h2>
-            <form class="popup__form" name="user-data">
-                <input class="popup__input popup__input_field-place" placeholder="Название" type="text" name="place">
-                <input class="popup__input popup__input_field-url" placeholder="Ссылка на картинку" type="url" name="url">
-                <button class="popup__submit" type="submit">Создать</button>
+            <form class="form form-add" name="card-data" novalidate>
+                <input class="form__input form__input_field-place" placeholder="Название" required type="text" name="place" minlength="2" maxlength="30">
+                <span class="error" id="place-error"></span>
+                <input class="form__input form__input_field-url" placeholder="Ссылка на картинку" required type="url" name="url">
+                <span class="error" id="url-error"></span>
+                <button class="form__submit" type="submit">Создать</button>
             </form>
         </div>
     </div>
@@ -79,6 +83,7 @@
     </footer>
 
     <script src="scripts/script.js"></script>
+    <script src="scripts/validate.js"></script>
 </body>
 
 </html>
