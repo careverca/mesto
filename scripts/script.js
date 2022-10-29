@@ -1,13 +1,13 @@
 // Profile elements
-const editBtn = document.querySelector(".profile__edit-btn");
-const addCardBtn = document.querySelector(".profile__add-btn");
+const editingBtn = document.querySelector(".profile__edit-btn");
+const addingCardBtn = document.querySelector(".profile__add-btn");
 const profileName = document.querySelector(".profile__name");
 const profileJob = document.querySelector(".profile__job");
 
 
 // Popup edit-card elements
 const popupEditCard = document.querySelector(".popup_type_edit-card");
-const editForm = popupEditCard.querySelector(".form-edit");
+const editingForm = popupEditCard.querySelector(".form-edit");
 const popupEditCardCloseBtn = popupEditCard.querySelector(".popup__close-btn");
 const inputName = popupEditCard.querySelector(".form__input_field-name");
 const inputNameError = popupEditCard.querySelector("#field-name-error");
@@ -16,7 +16,7 @@ const inputJobError = popupEditCard.querySelector("#field-job-error");
 
 // Popup add-card elements
 const popupAddCard = document.querySelector(".popup_type_add-card");
-const addForm = popupAddCard.querySelector(".form-add");
+const addingForm = popupAddCard.querySelector(".form-add");
 const popupAddCardCloseBtn = popupAddCard.querySelector(".popup__close-btn");
 const inputPlace = popupAddCard.querySelector(".form__input_field-place");
 const inputPlaceError = popupEditCard.querySelector("#field-place-error");
@@ -43,7 +43,7 @@ initialCards.forEach((el) => {
 });
 
 // Popup edit-card handling
-editBtn.addEventListener("click", openEditForm);
+editingBtn.addEventListener("click", openEditingForm);
 
 function openEditingForm() {
   togglePopup(popupEditCard);
@@ -53,7 +53,7 @@ function openEditingForm() {
   validateOnOpen(popupEditCard);
 }
 
-editForm.addEventListener("submit", (evt) => {
+editingForm.addEventListener("submit", (evt) => {
   evt.preventDefault();
   profileName.textContent = inputName.value;
   profileJob.textContent = inputJob.value;
@@ -65,7 +65,7 @@ popupEditCardCloseBtn.addEventListener("click", () => {
 });
 
 // Popup add-card handling
-addCardBtn.addEventListener("click", openAddCardForm);
+addingCardBtn.addEventListener("click", openAddCardForm);
 
 function openAddCardForm() {
   const submitButton = popupAddCard.querySelector(".form__submit");
@@ -73,7 +73,7 @@ function openAddCardForm() {
   inputPlace.parentElement.reset();
 }
 
-addForm.addEventListener("submit", (evt) => {
+addingForm.addEventListener("submit", (evt) => {
   evt.preventDefault();
   const title = inputPlace.value;
   const url = inputUrl.value;
@@ -101,8 +101,8 @@ function createCard(title, url) {
     openPicPopup(pic, text);
   });
 
-  const deletionBtn = element.querySelector(".element__remove");
-  deletionBtn.addEventListener("click", () => {
+  const removeBtn = element.querySelector(".element__remove");
+  removeBtn.addEventListener("click", () => {
     element.remove();
   });
 
