@@ -8,9 +8,10 @@
     background-color: transparent;
     background-size: contain;
     background: url("../../../images/like.svg") no-repeat 100% 100%;
+    cursor: pointer;
+    opacity: 1;
 }
 
 .element__like:hover {
     opacity: 0.5;
-    cursor: pointer;
 }
