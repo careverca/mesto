@@ -3,10 +3,9 @@ const enableValidation = {
   inputSelector: '.form__input',
   submittingButtonSelector: '.form__submit',
   inputErrorSelector: '.error',
-  inputErrorVisible: 'error_visible',
   submittingButtonInvalid: 'form__submit_invalid',
   inputInvalid: 'form__input_invalid',
-  errorVisible: 'error__visible'
+  errorVisible: 'error_visible'
 };
 
 function validateOnOpen(card) {
