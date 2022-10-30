@@ -70,6 +70,7 @@ addingCardBtn.addEventListener("click", openAddCardForm);
 function openAddCardForm() {
   togglePopup(popupAddCard);
   inputPlace.parentElement.reset();
+  toggleSubmitState(false, popupAddCard.querySelector('.form__submit'));
 }
 
 addingForm.addEventListener("submit", (evt) => {
