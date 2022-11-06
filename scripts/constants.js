@@ -25,5 +25,15 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg',
   },
 ];
+const validationData = {
+  formSelector: '.form',
+  inputSelector: '.form__input',
+  submittingButtonSelector: '.form__submit',
+  inputErrorSelector: '.error',
+  submittingButtonInvalid: 'form__submit_invalid',
+  inputInvalid: 'form__input_invalid',
+  errorVisible: 'error_visible'
+};
 
-export {initialCards};
+
+export {initialCards, validationData};

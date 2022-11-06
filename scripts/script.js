@@ -1,5 +1,5 @@
 // Imports
-import { initialCards } from './constants.js';
+import { initialCards, validationData} from './constants.js';
 import { Card } from './Card.js';
 import { FormValidator } from "./FormValidator.js";
 
@@ -39,15 +39,6 @@ popupPicCloseBtn.addEventListener('click', () => {
 // Other data
 const elements = document.querySelector('.elements');
 const templateSelector = '.template';
-const validationData = {
-  formSelector: '.form',
-  inputSelector: '.form__input',
-  submittingButtonSelector: '.form__submit',
-  inputErrorSelector: '.error',
-  submittingButtonInvalid: 'form__submit_invalid',
-  inputInvalid: 'form__input_invalid',
-  errorVisible: 'error_visible'
-};
 const editingFormValidator = new FormValidator(validationData, editingForm);
 editingFormValidator.enableValidation();
 const addingFormValidator = new FormValidator(validationData, addingForm);
@@ -55,14 +46,13 @@ addingFormValidator.enableValidation();
 
 // Filling card data
 initialCards.forEach((el) => {
-  const card = new Card(el.name, el.link, templateSelector).getCard();
-  addCard(card, 'bottom');
+  addCard(el.name, el.link, 'bottom');
 });
 
 // Popup edit-card handling
-editingBtn.addEventListener('click', openEditingForm);
+editingBtn.addEventListener('click', handleEditClick);
 
-function openEditingForm() {
+function handleEditClick() {
   togglePopup(popupEditCard);
   inputName.value = profileName.textContent;
   inputJob.value = profileJob.textContent;
@@ -82,11 +72,11 @@ popupEditCardCloseBtn.addEventListener('click', () => {
 });
 
 // Popup add-card handling
-addingCardBtn.addEventListener('click', openAddCardForm);
+addingCardBtn.addEventListener('click', handleAddCardClick);
 
-function openAddCardForm() {
+function handleAddCardClick() {
   togglePopup(popupAddCard);
-  inputPlace.parentElement.reset();
+  addingForm.reset()
   addingFormValidator.validateOnOpen();
 }
 
@@ -94,8 +84,7 @@ addingForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
   const title = inputPlace.value;
   const url = inputUrl.value;
-  const card = new Card(title, url, templateSelector).getCard();
-  addCard(card, 'top');
+  addCard(title, url, 'top');
   togglePopup(popupAddCard);
 });
 
@@ -103,8 +92,8 @@ popupAddCardCloseBtn.addEventListener('click', () => {
   togglePopup(popupAddCard);
 });
 
-
-function addCard(card, pos) {
+function addCard(title, url, pos) {
+  const card = new Card(title, url, templateSelector).getCard();
   if (pos === 'top') {
     elements.prepend(card);
   } else {
@@ -124,9 +113,9 @@ export function openPicPopup(pic, text) {
 function togglePopup(popup) {
   popup.classList.toggle('popup_opened');
   if (popup.classList.contains('popup_opened')) {
-    document.addEventListener('keydown', closeByEscape);
+    document.addEventListener('keydown', handleEscapePress);
   } else {
-    document.removeEventListener('keydown', closeByEscape);
+    document.removeEventListener('keydown', handleEscapePress);
   }
 }
 
@@ -150,7 +139,7 @@ popupPic.addEventListener('click', (evt) => {
 });
 
 // Closing by pressing 'ESC'
-function closeByEscape(evt) {
+function handleEscapePress(evt) {
   if (evt.key === 'Escape') {
     const openedPopup = document.querySelector('.popup_opened');
     togglePopup(openedPopup);
