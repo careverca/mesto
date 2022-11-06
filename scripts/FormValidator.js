@@ -13,10 +13,15 @@ export class FormValidator {
   validateOnOpen() {
     // If no input is made, show no error
     const inputIsEmpty = this._inputList.every((inputElement) => { 
-      return inputElement.value === ''; });
-    if (inputIsEmpty) { return; }
+      return inputElement.value === ''; 
+    });
+    
+    if (inputIsEmpty) { 
+      this._toggleSubmitState();
+      return;
+    }
 
-    this._checkIfAllInputIsValid();
+    this._toggleSubmitState();
     this._inputList.forEach((inputElement) => {
         this._checkInputValidity(inputElement);
     })
@@ -29,29 +34,9 @@ export class FormValidator {
         // Handling Error message (span) & Red underline warning
         this._checkInputValidity(inputElement);
         // Handling Submit Button state:
-        this._checkIfAllInputIsValid();
+        this._toggleSubmitState();
       });
     });
-  }
-
-  _checkInputValidity(inputElement) {
-    if (!inputElement.validity.valid) {
-      this._showInputError(inputElement, inputElement.validationMessage);
-    } else {
-      this._hideInputError(inputElement);
-    }
-  }
-
-  _checkIfAllInputIsValid() {
-    // Return FALSE if at least 1 inputElement is NOT valid
-    const valid = !this._inputList.some((inputElement) => {
-      return !inputElement.validity.valid;
-    });
-    if (valid) {
-      this._toggleSubmitState(true);
-    } else {
-      this._toggleSubmitState(false);
-    }
   }
 
   _showInputError(inputElement, errorMessage) {
@@ -64,7 +49,7 @@ export class FormValidator {
   }
 
   _hideInputError(inputElement) {
-    const errorElement = this.validationObject.querySelector(
+    const errorElement = this._validationObject.querySelector(
       '#' + inputElement.name + '-error'
     );
     inputElement.classList.remove(this._validationData.inputInvalid);
@@ -72,8 +57,8 @@ export class FormValidator {
     errorElement.textContent = '';
   }
 
-  _toggleSubmitState(state) {
-    if (state) {
+  _toggleSubmitState() {
+    if (this._checkIfAllInputIsValid()) {
       this._submittingButton.classList.remove(this._validationData.submittingButtonInvalid);
       this._submittingButton.removeAttribute('disabled');
     } else {
@@ -82,4 +67,17 @@ export class FormValidator {
     }
   }
 
+  _checkInputValidity(inputElement) {
+    if (inputElement.validity.valid) {
+      this._hideInputError(inputElement);
+    } else {
+      this._showInputError(inputElement, inputElement.validationMessage);
+    }
+  }
+
+  _checkIfAllInputIsValid() {
+    return this._inputList.every((inputElement) => {
+      return inputElement.validity.valid;
+    });
+  }
 }
