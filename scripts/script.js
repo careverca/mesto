@@ -2,6 +2,7 @@
 import { initialCards, validationData } from './constants.js';
 import { Card } from './Card.js';
 import { FormValidator } from "./FormValidator.js";
+import PopupWithImage from "./PopupWithImage.js";
 import Section from './Section.js';
 import PopupWithForm from './PopupWithForm.js';
 import UserInfo from './UserInfo.js';
@@ -32,12 +33,21 @@ const editingFormValidator = new FormValidator(validationData, editingForm);
 editingFormValidator.enableValidation();
 const addingFormValidator = new FormValidator(validationData, addingForm);
 addingFormValidator.enableValidation();
+const popupWithImage = new PopupWithImage('.popup_type_pic');
 
 // Filling cards data
 const initialCardsList = new Section({
   items: initialCards,
   renderer: (cardItem) => {
-    const card = new Card(cardItem.name, cardItem.link).getCard();
+    const card = new Card(
+      cardItem.name,
+      cardItem.link,
+      {
+        handleCardClick: (imgSrc, imgAlt, text) => {
+          popupWithImage.open(imgSrc, imgAlt, text);
+        }
+      }
+    ).getCard();
     initialCardsList.addItem(card, 'bottom');
   },
 },
@@ -94,7 +104,16 @@ function handleAddCardBtnClick() {
 }
 
 function addCard(title, url, pos) {
-  const card = new Card(title, url, templateSelector).getCard();
+  const card = new Card(
+    title,
+    url,
+    {
+      handleCardClick: (imgSrc, imgAlt, text) => {
+        popupWithImage.open(imgSrc, imgAlt, text);
+      }
+    }
+  ).getCard();
+
   pos === 'top'
     ? cardsContainerEl.prepend(card)
     : cardsContainerEl.append(card);
