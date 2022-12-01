@@ -1,11 +1,11 @@
 // Imports
-import { initialCards, validationData } from './constants.js';
-import { Card } from './Card.js';
-import { FormValidator } from "./FormValidator.js";
-import PopupWithImage from "./PopupWithImage.js";
-import Section from './Section.js';
-import PopupWithForm from './PopupWithForm.js';
-import UserInfo from './UserInfo.js';
+import { initialCards, validationData } from './utils/constants.js';
+import { Card } from './components/Card.js';
+import { FormValidator } from "./components/FormValidator.js";
+import PopupWithImage from "./components/PopupWithImage.js";
+import Section from './components/Section.js';
+import PopupWithForm from './components/PopupWithForm.js';
+import UserInfo from './components/UserInfo.js';
 
 // Profile elements
 const editingBtn = document.querySelector('.profile__edit-btn');
@@ -23,7 +23,7 @@ const inputJob = popupEditCard.querySelector('.form__input_field-job');
 const popupAddCard = document.querySelector('.popup_type_add-card');
 const addingForm = popupAddCard.querySelector('.form-add');
 const inputPlace = popupAddCard.querySelector('.form__input_field-place');
-const inputUrl = popupAddCard.querySelector('.form__input_field-url');
+const inputUrl = popupAddCard.querySelector('.form__inut_field-url');
 
 // Other data
 const templateSelector = '.template';
