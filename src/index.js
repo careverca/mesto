@@ -1,4 +1,5 @@
 // Imports
+import './pages/index.css'; 
 import { initialCards, validationData } from './utils/constants.js';
 import { Card } from './components/Card.js';
 import { FormValidator } from "./components/FormValidator.js";
@@ -23,7 +24,7 @@ const inputJob = popupEditCard.querySelector('.form__input_field-job');
 const popupAddCard = document.querySelector('.popup_type_add-card');
 const addingForm = popupAddCard.querySelector('.form-add');
 const inputPlace = popupAddCard.querySelector('.form__input_field-place');
-const inputUrl = popupAddCard.querySelector('.form__inut_field-url');
+const inputUrl = popupAddCard.querySelector('.form__input_field-url');
 
 // Other data
 const templateSelector = '.template';
