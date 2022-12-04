@@ -1,7 +1,5 @@
-import PopupWithImage from './PopupWithImage.js';
-
 export class Card {
-  constructor(title, url, { handleCardClick } ) {
+  constructor(title, url, { handleCardClick }) {
     this._title = title;
     this._url = url;
 
@@ -14,32 +12,37 @@ export class Card {
     this._likeBtn = this._card.querySelector('.element__like');
 
     this._handleCardClick = handleCardClick;
-    this._createCard();
   }
 
   _createCard() {
-    this._addEventListeners();
+    this._setEventListeners();
+    this._setEventListenerForLikeBtn();
+    this._setEventListenerForRemoveBtn();
     this._insertData();
   }
 
-  _addEventListeners() {
+  _setEventListeners() {
     this._img.addEventListener('click', () => {
       this._handleCardClick(
         this._img.src,
         this._img.alt,
         this._text.textContent
-        );
+      );
     });
-    
-    this._removeBtn.addEventListener('click', () => {
-      this._card.remove();
-      this._template = null;
-    });
-    
+  }
+
+  _setEventListenerForLikeBtn() {
     this._likeBtn.addEventListener('click', () => {
       this._likeBtn.classList.toggle('element__like_active');
     });
+  }
 
+  _setEventListenerForRemoveBtn() {
+    this._removeBtn.addEventListener('click', () => {
+      this._card.remove();
+      this._template = null;
+      delete this._template;
+    });
   }
 
   _insertData() {
@@ -49,6 +52,7 @@ export class Card {
   }
 
   getCard() {
+    this._createCard();
     return this._card;
   }
 }
