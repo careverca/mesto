@@ -4,9 +4,8 @@
   "description": "https://careverca.github.io/mesto/ Данный проект -- возможность сохранить свои поездки в карточках!",
   "main": "index.js",
   "scripts": {
-    "prod": "webpack --mode production",
-    "dev": "webpack --mode development",
-    "ds": "webpack serve --mode development"
+    "build": "webpack --mode production",
+    "dev": "webpack serve --mode development"
   },
   "repository": {
     "type": "git",

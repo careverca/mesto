@@ -23,18 +23,15 @@ const inputJob = popupEditCard.querySelector('.form__input_field-job');
 // Popup add-card elements
 const popupAddCard = document.querySelector('.popup_type_add-card');
 const addingForm = popupAddCard.querySelector('.form-add');
-const inputPlace = popupAddCard.querySelector('.form__input_field-place');
-const inputUrl = popupAddCard.querySelector('.form__input_field-url');
 
 // Other data
-const templateSelector = '.template';
 const cardsContainer = '.elements';
 const cardsContainerEl = document.querySelector(cardsContainer);
 const editingFormValidator = new FormValidator(validationData, editingForm);
 editingFormValidator.enableValidation();
 const addingFormValidator = new FormValidator(validationData, addingForm);
 addingFormValidator.enableValidation();
-const popupWithImage = new PopupWithImage('.popup_type_pic');
+//const popupWithImage = new PopupWithImage('.popup_type_pic');
 
 // Filling cards data
 const initialCardsList = new Section({
@@ -59,9 +56,8 @@ initialCardsList.renderItems();
 
 // Popup edit-card handling
 editingBtn.addEventListener('click', handleEditBtnClick);
-const userInfo = new UserInfo(profileName.textContent, profileJob.textContent);
-
 function handleEditBtnClick() {
+  const userInfo = new UserInfo(profileName.textContent, profileJob.textContent);
   const popupWithForm = new PopupWithForm(
     '.popup_type_edit-card',
     {
@@ -70,11 +66,10 @@ function handleEditBtnClick() {
         inputName.value = userInfoData.name;
         inputJob.value = userInfoData.job;
         editingFormValidator.validateOnOpen();
+  popupWithForm.setEventListeners();
       },
-      submitCallback: (evt) => {
-        evt.preventDefault();
-        userInfo.setUserInfo();
-        popupWithForm.close();
+      submitCallback: (inputValues) => {
+        userInfo.setUserInfo(inputValues);
       }
     }
   )
@@ -89,18 +84,17 @@ function handleAddCardBtnClick() {
     '.popup_type_add-card',
     {
       openCallback: () => {
-        addingForm.reset()
+        //addingForm.reset()
         addingFormValidator.validateOnOpen();
       },
-      submitCallback: (evt) => {
-        evt.preventDefault();
-        const title = inputPlace.value;
-        const url = inputUrl.value;
+      submitCallback: (inputValues) => {
+        const title = inputValues.place;
+        const url = inputValues.url;
         addCard(title, url, 'top');
-        popupWithForm.close();
       }
     }
   )
+  popupWithForm.setEventListeners();
   popupWithForm.open();
 }
 
@@ -114,6 +108,7 @@ function addCard(title, url, pos) {
       }
     }
   ).getCard();
+  console.log(card);
 
   pos === 'top'
     ? cardsContainerEl.prepend(card)
