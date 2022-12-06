@@ -41,25 +41,24 @@ const initialCardsList = new Section({
 )
 
 initialCardsList.renderItems(initialCards);
+const userInfo = new UserInfo({ profileNameSel: '.profile__name', profileJobSel: '.profile__job' });
 
 // Popup Edit-Card handling
 const popupWithEditForm = new PopupWithForm(
   '.popup_type_edit-card',
   {
     openCallback: () => {
-      const userInfo = new UserInfo({ profileNameSel: '.profile__name', profileJobSel: '.profile__job' });
       const userInfoData = userInfo.getUserInfo();
       inputName.value = userInfoData.name;
       inputJob.value = userInfoData.job;
       editingFormValidator.validateOnOpen();
-      popupWithEditForm.setEventListeners();
     },
     submitCallback: (inputValues) => {
-      const userInfo = new UserInfo({ profileNameSel: '.profile__name', profileJobSel: '.profile__job' });
       userInfo.setUserInfo(inputValues);
     }
   }
 )
+popupWithEditForm.setEventListeners();
 
 // Popup Add-Card handling
 const popupWithAddCardForm = new PopupWithForm(
@@ -67,7 +66,6 @@ const popupWithAddCardForm = new PopupWithForm(
   {
     openCallback: () => {
       addingFormValidator.validateOnOpen();
-      popupWithAddCardForm.setEventListeners();
     },
     submitCallback: (inputValues) => {
       const card = createCard(inputValues.place, inputValues.url);
@@ -75,6 +73,7 @@ const popupWithAddCardForm = new PopupWithForm(
     }
   }
 )
+popupWithAddCardForm.setEventListeners();
 
 // Popup Image handling 
 const popupWithImage = new PopupWithImage('.popup_type_pic');

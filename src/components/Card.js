@@ -16,8 +16,6 @@ export class Card {
 
   _createCard() {
     this._setEventListeners();
-    this._setEventListenerForLikeBtn();
-    this._setEventListenerForRemoveBtn();
     this._insertData();
   }
 
@@ -29,20 +27,18 @@ export class Card {
         this._text.textContent
       );
     });
+    this._likeBtn.addEventListener('click', this._toggleLike);
+    this._removeBtn.addEventListener('click', this._clickRemove);
   }
 
-  _setEventListenerForLikeBtn() {
-    this._likeBtn.addEventListener('click', () => {
+  _toggleLike = () => {
       this._likeBtn.classList.toggle('element__like_active');
-    });
   }
 
-  _setEventListenerForRemoveBtn() {
-    this._removeBtn.addEventListener('click', () => {
+  _clickRemove = () => {
       this._card.remove();
       this._template = null;
       delete this._template;
-    });
   }
 
   _insertData() {
