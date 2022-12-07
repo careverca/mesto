@@ -38,7 +38,7 @@ export class Card {
   _clickRemove = () => {
       this._card.remove();
       this._template = null;
-      delete this._template;
+      this._card = null;
   }
 
   _insertData() {
