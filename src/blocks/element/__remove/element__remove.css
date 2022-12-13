@@ -1,4 +1,5 @@
 .element__remove {
+    display: none;
     width: 18px;
     height: 19px;
     position: absolute;
