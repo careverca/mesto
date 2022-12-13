@@ -17,6 +17,7 @@ const editProfileImg = document.querySelector('.profile__avatar-box');
 const popupEditProfileImg = document.querySelector('.popup_type_edit-profile-img');
 const profileImg = document.querySelector('.profile__avatar');
 const formInputProfileImg = document.querySelector('.form__input_img');
+const editProfileImgForm = document.querySelector('.form-edit-profile-img');
 const submitProfileImgBtn = popupEditProfileImg.querySelector('.form__submit');
 
 // Popup edit-card elements
@@ -35,11 +36,13 @@ const submitAddBtn = popupAddCard.querySelector('.form__submit');
 const cardsContainerSel = '.elements';
 const cardsContainerEl = document.querySelector(cardsContainerSel);
 const editingFormValidator = new FormValidator(validationData, editingForm);
-editingFormValidator.enableValidation();
 const addingFormValidator = new FormValidator(validationData, addingForm);
+const updatingImageFormValidator = new FormValidator(validationData, editProfileImgForm);
 const popupDeleteCard = document.querySelector('.popup_type_delete-card');
 const submitCardDeletion = popupDeleteCard.querySelector('.form__submit');
+editingFormValidator.enableValidation();
 addingFormValidator.enableValidation();
+updatingImageFormValidator.enableValidation();
 
 
 // Setting initial Cards from API
