@@ -1,12 +1,13 @@
-import { api } from "./Api.js";
-import PopupWithForm from "./PopupWithForm.js";
 export default class Card {
-  constructor(title, url, id, likes, owned, { handleImageClick, handleDeletionClick }) {
+  constructor(title, url, id, likes, { owned, userId }, { handleImageClick, handleDeletionClick }, { api }) {
     this._title = title;
     this._url = url;
     this._id = id;
-    this._likes = likes.length;
+    this._likes = likes;
+    this._likesCount = likes.length;
     this._owned = owned;
+    this._userId = userId;
+    this._api = api;
 
     this._templateSelector = '.template';
     this._template = document.querySelector(this._templateSelector).content;
@@ -25,7 +26,8 @@ export default class Card {
     this._setEventListeners();
     this._insertData();
     this._setLikeCount();
-    this._toggleDeleteBtn();
+    this._toggleDeleteBtnIfOwned();
+    this._checkIfLiked();
   }
 
   _setEventListeners() {
@@ -40,38 +42,47 @@ export default class Card {
     this._removeBtn.addEventListener('click', this._clickRemove);
   }
 
+  _checkIfLiked() {
+    this._likes.forEach((like) => {
+      if (like._id === this._userId) {
+        this._blackenLike()
+      }
+    })
+  }
+
+  _blackenLike() {
+    this._likeBtn.classList.add('element__like_active');
+  }
+
   _toggleLike = () => {
     if (this._likeBtn.classList.contains('element__like_active')) {
-      this._likeBtn.classList.remove('element__like_active');
-      this._likes--;
-      api.unlikeCard(this._id)
+      this._api.unlikeCard(this._id)
         .then(res => {
-          console.log(res);
+          this._likeBtn.classList.remove('element__like_active');
+          this._likesCount = res.likes.length;
           this._setLikeCount();
         })
     } else {
-      this._likeBtn.classList.add('element__like_active');
-      this._likes++;
-      api.likeCard(this._id)
+      this._api.likeCard(this._id)
         .then(res => {
-          console.log(res);
+          this._likeBtn.classList.add('element__like_active');
+          this._likesCount = res.likes.length;
           this._setLikeCount();
-        })
-      this._setLikeCount();
+        });
     }
   }
 
   _setLikeCount() {
-    if (this._likes > 0) {
+    if (this._likesCount > 0) {
       this._likeCount.style.display = 'block';
-      this._likeCount.textContent = this._likes;
+      this._likeCount.textContent = this._likesCount;
     } else {
       this._likeCount.style.display = 'none';
     }
   }
 
-  _toggleDeleteBtn() {
-    this._owned 
+  _toggleDeleteBtnIfOwned() {
+    this._owned
       ? this._removeBtn.style.display = 'block'
       : this._removeBtn.style.display = 'none'
   }

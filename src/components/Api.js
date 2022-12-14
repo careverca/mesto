@@ -1,5 +1,5 @@
 class Api {
-   constructor({ baseUrl, headers}) {
+   constructor({ baseUrl, headers }) {
       // тело конструктора
       this._baseUrl = baseUrl;
       this._headers = headers;
@@ -10,8 +10,7 @@ class Api {
       return fetch(`${this._baseUrl}/users/me/`, {
          headers: this._headers,
       })
-         .then(res => res.ok ? res.json() : Promise.reject(res.status))
-         .catch(console.log())
+         .then(this._checkResponse);
    }
 
    setProfileData(inputValues) {
@@ -22,15 +21,15 @@ class Api {
             name: inputValues.name,
             about: inputValues.job
          })
-      });
+      })
+         .then(this._checkResponse);
    }
 
    getInitialCards() {
       return fetch(`${this._baseUrl}/cards/`, {
          headers: this._headers,
       })
-         .then(res => res.ok ? res.json() : Promise.reject(res.status))
-         .catch(console.log())
+         .then(this._checkResponse);
    }
 
    addNewCard(inputValues) {
@@ -42,8 +41,7 @@ class Api {
             link: inputValues.url
          })
       })
-         .then(res => res.ok ? res.json() : Promise.reject(res.status))
-         .catch(console.log())
+         .then(this._checkResponse);
 
    }
 
@@ -52,7 +50,7 @@ class Api {
          method: 'DELETE',
          headers: this._headers,
       })
-         .then(res => res.ok ? res.json() : Promise.reject(res.status))
+         .then(this._checkResponse);
    }
 
    likeCard(id) {
@@ -60,7 +58,7 @@ class Api {
          method: 'PUT',
          headers: this._headers,
       })
-         .then(res => res.ok ? res.json() : Promise.reject(res.status))
+         .then(this._checkResponse);
    }
 
    unlikeCard(id) {
@@ -68,7 +66,7 @@ class Api {
          method: 'DELETE',
          headers: this._headers,
       })
-         .then(res => res.ok ? res.json() : Promise.reject(res.status))
+         .then(this._checkResponse);
    }
 
    getProfileImage() {
@@ -76,7 +74,7 @@ class Api {
          method: 'GET',
          headers: this._headers,
       })
-         .then(res => res.ok ? res.json() : Promise.reject(res.status))
+         .then(this._checkResponse);
    }
 
    updateProfileImage(url) {
@@ -87,9 +85,12 @@ class Api {
             avatar: url,
          })
       })
-         .then(res => res.ok ? res.json() : Promise.reject(res.status))
+         .then(this._checkResponse);
    }
 
+   _checkResponse(res) {
+         return res.ok ? res.json() : Promise.reject(res.status);
+    }
 
 }
 
