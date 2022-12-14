@@ -62,12 +62,18 @@ export default class Card {
           this._likesCount = res.likes.length;
           this._setLikeCount();
         })
+        .catch(err => {
+          console.log(err);
+        });
     } else {
       this._api.likeCard(this._id)
         .then(res => {
           this._likeBtn.classList.add('element__like_active');
           this._likesCount = res.likes.length;
           this._setLikeCount();
+        })
+        .catch(err => {
+          console.log(err);
         });
     }
   }

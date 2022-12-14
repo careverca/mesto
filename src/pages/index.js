@@ -151,9 +151,7 @@ popupWithConfirmation.setEventListeners();
 const popupWithProfileImgEditing = new PopupWithForm('.popup_type_edit-profile-img',
   {
     openCallback: () => {
-      const submittingButton = popupWithProfileImgEditing._popup.querySelector('.form__submit');
-      submittingButton.classList.add('form__submit_invalid');
-      submittingButton.setAttribute('disabled', true);
+      updatingImageFormValidator.validateOnOpen();
     },
     submitCallback: () => {
       submitProfileImgBtn.innerText = 'Сохранение...';
